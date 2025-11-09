@@ -546,10 +546,6 @@
         </div>
     </section>
 
-    <audio id="backgroundMusic" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-    </audio>
-
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const preloader = document.getElementById('preloader');
@@ -595,7 +591,6 @@
             
             // --- Screen 1 Logic ---
             welcomeHeart.addEventListener('click', function() {
-                backgroundMusic.play().catch(e => console.log('Audio play failed:', e));
                 //this.classList.add('falling');
                 
                 setTimeout(() => {
