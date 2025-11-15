@@ -211,6 +211,29 @@
             to { box-shadow: 0 0 50px rgba(255, 107, 129, 1); }
         }
 
+        .click-here-text {
+            font-size: 1rem;
+            margin-top: 15px;
+            font-style: italic;
+            opacity: 0.9;
+            transition: opacity 0.3s ease;
+        }
+
+        #screen1 .click-here-text {
+            color: white;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+        }
+
+        #screen2 .click-here-text {
+            color: #4a2c2a;
+            animation-delay: 1s;
+        }
+
+        #screen3 .click-here-text {
+            color: #4a2c2a;
+            z-index: 10;
+        }
+
         /* --- Screen 2: Save The Date --- */
         #screen2 .fade-in {
             opacity: 0;
@@ -450,7 +473,10 @@
     <section id="screen1" class="screen active">
         <div class="content">
             <h1>Welcome to the Wedding Celebration of <br> Akshita & Gaurav</h1>
-            <div class="welcome-heart-button" id="welcomeHeart"></div>
+            <div style="display: flex; flex-direction: column; align-items: center; margin-top: 20px;">
+                <div class="welcome-heart-button" id="welcomeHeart"></div>
+                <div class="click-here-text" id="screen1ClickHere">Click Here</div>
+            </div>
         </div>
     </section>
 
@@ -465,6 +491,7 @@
         </div>
         <div id="couple-name" class="golden-text shimmer fade-in">Akshita ❤️ Gaurav</div>
         <div id="save-the-date-text" class="fade-in">Save the Date — 12th December 2025</div>
+        <div class="click-here-text fade-in" id="screen2ClickHere">Click Here</div>
     </section>
 
     <section id="screen3" class="screen">
@@ -479,7 +506,10 @@
                         of their forever.
                     </div>
                 </div>
-                <div class="heart-button" id="heartButton"></div>
+                <div style="display: flex; flex-direction: column; align-items: center; margin-top: 20px;">
+                    <div class="heart-button" id="heartButton"></div>
+                    <div class="click-here-text" id="screen3ClickHere">Click Here</div>
+                </div>
                  <div class="tree-container" id="treeContainer">
                     <canvas id="treeCanvas"></canvas>
                 </div>
@@ -591,7 +621,11 @@
             
             // --- Screen 1 Logic ---
             welcomeHeart.addEventListener('click', function() {
-                //this.classList.add('falling');
+                // Hide "Click Here" text when leaving screen 1
+                const screen1ClickHere = document.getElementById('screen1ClickHere');
+                if (screen1ClickHere) {
+                    screen1ClickHere.style.opacity = '0';
+                }
                 
                 setTimeout(() => {
                     switchScreen('screen2');
@@ -601,6 +635,12 @@
             // --- Screen 2 Logic ---
             let screen2Timeout;
             function proceedToScreen3() {
+                // Hide "Click Here" text when leaving screen 2
+                const screen2ClickHere = document.getElementById('screen2ClickHere');
+                if (screen2ClickHere) {
+                    screen2ClickHere.style.opacity = '0';
+                }
+                
                 clearTimeout(screen2Timeout);
                 switchScreen('screen3');
                 // Make the welcome text and heart button on screen 3 visible for the next interaction
@@ -624,6 +664,12 @@
             const heartButton3 = document.getElementById('heartButton');
             
             heartButton3.addEventListener('click', function() {
+                // Hide "Click Here" text when clicking the heart on screen 3
+                const screen3ClickHere = document.getElementById('screen3ClickHere');
+                if (screen3ClickHere) {
+                    screen3ClickHere.style.opacity = '0';
+                }
+                
                 // Calculate current position and center offset
                 const rect = this.getBoundingClientRect();
                 const currentCenterX = rect.left + rect.width / 2; // Center of heart
